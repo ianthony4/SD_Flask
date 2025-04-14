@@ -1,0 +1,64 @@
+/* Estilos generales, Pueden ser */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* Dropzone */
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: #f8f9fa;
+    min-height: 200px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.dz-message {
+    margin: 3em 0;
+    text-align: center;
+    font-size: 1.5em;
+    color: #555;
+}
+
+.dz-message small {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.7em;
+    color: #888;
+}
+
+/* Galería */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.gallery img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: white;
+}
+
+/* Estados de Dropzone */
+.dropzone.dz-started .dz-message {
+    display: none;
+}
+
+.dropzone .dz-preview .dz-error-message {
+    background: #ff5252;
+    color: white;
+}

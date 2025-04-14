@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SD - G05 - Flask & Dropzone</title>
+    <!-- Dropzone CSS (En base a la documentacion) -->
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css">
+    <!-- Nuestro CSS (Opcional) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Subida de imágenes con Dropzone</h1>
+        
+        <form action="/" class="dropzone" id="myDropzone">
+            <div class="dz-message">
+                Arrastra tus imágenes aquí o haz clic para seleccionar<br>
+                <small>(Solo se aceptan .jpg, .png, .gif, máximo 2MB)</small>
+            </div>
+        </form>
+        
+        <h2>Imágenes subidas:</h2>
+        <div class="gallery">
+            {% for file in files %}
+                {% if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                    <img src="{{ url_for('upload', filename=file) }}" alt="{{ file }}">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Dropzone JS (Inmutable, no se puede modificar) -->
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <!-- Nuestro JS (Esto si se puede cambiar, sobretodo para manejar el español)-->
+    <script src="{{ url_for('static', filename='js/dropzone-config.js') }}"></script>
+</body>
+</html>

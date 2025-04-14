@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SD - G05 - Flask & Dropzone</title>
-    <!-- Dropzone CSS (En base a la documentacion) -->
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css">
-    <!-- Nuestro CSS (Opcional) -->
+    <title>SD - T02 - Procesamiento de Bordes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Subida de imágenes con Dropzone</h1>
+        <h1>Agregar Bordes a Imágenes</h1>
         
-        <form action="/" class="dropzone" id="myDropzone">
-            <div class="dz-message">
-                Arrastra tus imágenes aquí o haz clic para seleccionar<br>
-                <small>(Solo se aceptan .jpg, .png, .gif, máximo 2MB)</small>
-            </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept=".jpg,.jpeg,.png,.bmp">
+            <button type="submit">Procesar</button>
         </form>
         
-        <h2>Imágenes subidas:</h2>
-        <div class="gallery">
-            {% for file in files %}
-                {% if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
-                    <img src="{{ url_for('upload', filename=file) }}" alt="{{ file }}">
-                {% endif %}
-            {% endfor %}
+        <div id="errorContainer" class="error"></div>
+        
+        <div class="gallery-container">
+            <div class="image-column">
+                <h2>Original</h2>
+                <div id="originalGallery" class="gallery">
+                    {% for img in originales %}
+                        <img src="{{ url_for('serve_original', filename=img) }}" alt="Original">
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="image-column">
+                <h2>Con Bordes</h2>
+                <div id="borderedGallery" class="gallery">
+                    {% for img in bordes %}
+                        <img src="{{ url_for('serve_bordered', filename=img) }}" alt="Con bordes">
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Dropzone JS (Inmutable, no se puede modificar) -->
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <!-- Nuestro JS (Esto si se puede cambiar, sobretodo para manejar el español)-->
-    <script src="{{ url_for('static', filename='js/dropzone-config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
